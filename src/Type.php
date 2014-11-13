@@ -11,6 +11,8 @@
 
 namespace Hexcores\Currency;
 
+use Hexcores\Currency\Exceptions\NotSupportedTypeException;
+
 /**
  * Describes currenty types.
  *
@@ -65,11 +67,57 @@ class Type
 	const USD = 'USD';
 
 	/**
-	 * Supported type cache list;
+	 * Supported currency type list;
 	 * 
-	 * @var  array|null
+	 * @var  array
 	 */
-	protected static $supported_types;
+	private static $supported_types = array(
+			'AUD' => array(
+				'format'			=> 'A${value}',
+				'decimal_mark'   	=> '.',
+	            'thousand_marker'  	=> ','
+			),
+			'CNY' => array(
+				'format'			=> '&yen;{value}',
+				'decimal_mark'   	=> '.',
+	            'thousand_marker'  	=> ','
+			),
+			'EUR' => array(
+	            'format'     		=> '&euro;{value}',
+	            'decimal_mark'    	=> '.',
+	            'thousand_marker'   => ','
+	        ),
+			'GBP' => array(
+	            'format'      		=> '&pound;{value}',
+	            'decimal_mark'     	=> '.',
+	            'thousand_marker'   => ','
+	        ),
+	        'JPY' => array(
+				'format'			=> '&yen;{value}',
+				'decimal_mark'   	=> '.',
+	            'thousand_marker'  	=> ','
+			),
+			'MMK' => array(
+				'format'			=> '{value}Ks',
+				'decimal_mark'   	=> '.',
+	            'thousand_marker'  	=> ','
+			),
+			'SGD' => array(
+	            'format'      		=> 'S${value}',
+	            'decimal_mark'     	=> '.',
+	            'thousand_marker'   => ','
+	        ),
+	        'THB' => array(
+	            'format'      		=> '฿{value}',
+	            'decimal_mark'     	=> '.',
+	            'thousand_marker'   => ','
+	        ),
+			'USD' => array(
+	            'format'      		=> '${value}',
+	            'decimal_mark'     	=> '.',
+	            'thousand_marker'   => ','
+	        )
+		);
 
 	/**
 	 * Check given type is supported type or not.
@@ -85,14 +133,23 @@ class Type
 	 */
 	public static function isSupported($type)
 	{
-		if ( is_null(static::$supported_types))
-		{
-			$reflection = new \ReflectionClass('\Hexcores\Currency\Type');
-			$types = $reflection->getConstants();
-			static::$supported_types = $types;
-		}
-		
 		return isset(static::$supported_types[$type]);
+	}
+
+	/**
+	 * Get currenct type data.
+	 * @param  string $type
+	 * @return array
+	 * @throws \Hexcores\Currency\Exceptions\NotSupportedTypeException
+	 */
+	public static function getTypeData($type)
+	{
+		if ( ! static::isSupported($type))
+		{
+			throw new NotSupportedTypeException($type);
+		}
+
+		return static::$supported_types[$type];
 	}
 
 } // END class Type

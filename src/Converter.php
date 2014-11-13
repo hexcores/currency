@@ -13,6 +13,7 @@ namespace Hexcores\Currency;
 
 use Hexcores\Currency\Contract\ExchangeContract;
 use Hexcores\Currency\Contract\FormatterContract;
+use Hexcores\Currency\Exceptions\NotSupportedTypeException;
 
 /**
  * Currency Converter Class
@@ -160,13 +161,28 @@ class Converter
 	 * @param  float|integer $value Currency value
 	 * @param  string $from  This parameter is optional
 	 * @param  string $to    This parameter is optional
-	 * @return [type]        [description]
+	 * @return string
 	 */
 	public function convert($value, $from = null, $to = null)
 	{
+		$value = (float) $value;
+
 		// Save Original Value
 		$this->original_value = $value;
 
+		return $this->makeConverting($value, $from, $to);
+	}
+
+	/**
+	 * Make converting the currency value.
+	 * 
+	 * @param  float|integer $value Currency value
+	 * @param  string $from  This parameter is optional
+	 * @param  string $to    This parameter is optional
+	 * @return string
+	 */
+	protected function makeConverting($value, $from = null, $to = null)
+	{
 		if ( ! is_null($from) ) {
 			$this->from($from);
 		}
@@ -183,7 +199,7 @@ class Converter
 	 * and change currency format with request type.
 	 *
 	 * @param float $value
-	 * @return float
+	 * @return string
 	 **/
 	protected function makeConvertAndFormatting($value)
 	{
@@ -194,14 +210,58 @@ class Converter
 		return $this->converted_value;
 	}
 
+	/**
+	 * Make converting currency value with exchange adapter.
+	 * 
+	 * @param float $value
+	 * @return float
+	 */
 	protected function makeConvert($value)
 	{
 		return $this->exchange->make($value, $this->from, $this->to);
 	}
 
+	/**
+	 * Make currency formatting with formatter adapter.
+	 * 
+	 * @param float $value
+	 * @return string
+	 */
 	protected function makeFormatting($value)
 	{
 		return $this->formatter->make($value, $this->to);
+	}
+
+	/**
+	 * PHP magic method call for "convertTo{TYPE}".
+	 * 
+	 * @param  string $method
+	 * @param  [type] $param  [description]
+	 * @return [type]         [description]
+	 */
+	public function __call($method, $param)
+	{
+		if (preg_match('/^convertTo(\w+)$/', $method, $matches)) 
+		{
+			$type = strtoupper($matches[1]);
+
+			if ( Type::isSupported($type))
+			{
+				if ( isset($param[0]))
+				{
+					$val = (float) $param[0];
+				}
+				else
+				{
+					$val = $this->original_value;	
+				}
+				
+				return $this->makeConverting($val, $this->from, $type);
+			}
+
+			throw new NotSupportedTypeException($type);
+			
+		}
 	}
 
 } // END class Converter
