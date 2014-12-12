@@ -24,7 +24,7 @@ class NotSupportedTypeException extends \Exception
 	{
 		$type = strtoupper($type);
 
-		$msg = sprintf("Currnecy Type [ %s ] is not supported", $type);
+		$msg = sprintf("Currency Type [ %s ] is not supported", $type);
 
 		parent::__construct($msg, $code);
 	}

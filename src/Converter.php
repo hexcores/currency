@@ -23,7 +23,6 @@ use Hexcores\Currency\Exceptions\NotSupportedTypeException;
  **/
 class Converter
 {
-
 	/**
 	 * Exchange Service class instance
 	 *
@@ -37,6 +36,13 @@ class Converter
 	 * @var \Hexcores\Currency\Contract\FormatterContract
 	 **/
 	protected $formatter;
+
+	/**
+	 * Default value for Formatter decimal limit
+	 * 
+	 * @var integer
+	 */
+	protected $default_format_decimal = 2;
 
 	/**
 	 * Original currency value.
@@ -75,8 +81,8 @@ class Converter
 	public function __construct(ExchangeContract $exchange, 
 								FormatterContract $formatter)
 	{
-		$this->exchange = $exchange;
-		$this->formatter = $formatter;
+		$this->setExchange($exchange);
+		$this->setFormatter($formatter);
 	}
 
 	/**
@@ -120,10 +126,33 @@ class Converter
 	}
 
 	/**
+	 * Set format deciaml point
+	 * 
+	 * @param  int $decimal
+	 * @return \Hexcores\Currency\Converter
+	 */
+	public function setDecimal($decimal)
+	{
+		$this->default_format_decimal = (int) $decimal;
+
+		return $this;
+	}
+
+	/**
+	 * Get format deciaml point
+	 * 
+	 * @return int
+	 */
+	public function getDecimal()
+	{
+		return $this->default_format_decimal;
+	}
+
+	/**
 	 * Set original currency type ($from)
 	 * 
 	 * @param  string $from
-	 * @return \Hexcores\Currency\Cconverter
+	 * @return \Hexcores\Currency\Converter
 	 */
 	public function from($from)
 	{
@@ -136,7 +165,7 @@ class Converter
 	 * Set currency type to convert ($to)
 	 * 
 	 * @param  string $to
-	 * @return \Hexcores\Currency\Cconverter
+	 * @return \Hexcores\Currency\Converter
 	 */
 	public function to($to)
 	{
@@ -229,19 +258,20 @@ class Converter
 	 */
 	protected function makeFormatting($value)
 	{
-		return $this->formatter->make($value, $this->to);
+		return $this->formatter->make($value, $this->to, $this->getDecimal());
 	}
 
 	/**
 	 * PHP magic method call for "convertTo{TYPE}".
 	 * 
 	 * @param  string $method
-	 * @param  [type] $param  [description]
-	 * @return [type]         [description]
+	 * @param  array $param
+	 * @return string
+	 * @throws \Hexcores\Currency\Exceptions\NotSupportedTypeException
 	 */
 	public function __call($method, $param)
 	{
-		if (preg_match('/^convertTo(\w+)$/', $method, $matches)) 
+		if ( preg_match('/^convertTo(\w+)$/', $method, $matches)) 
 		{
 			$type = strtoupper($matches[1]);
 

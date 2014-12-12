@@ -45,14 +45,4 @@ class BaseFormatter implements FormatterContract
 
 		return $this->value;
 	}
-
-	/**
-	 * PHP magic method for printing
-	 *
-	 * @return string
-	 **/
-	public function __toString()
-	{
-		return $this->value;
-	}
 }
