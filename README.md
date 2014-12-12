@@ -2,6 +2,8 @@
 
 Currency package is easy to use multiple currency value (format) at your application. (eg: E-Commerce)
 
+[![Build Status](https://img.shields.io/travis/hexcores/currency.svg?style=flat-square)](https://travis-ci.org/hexcores/currency)
+
 ## Package Dependencies
 
 * "php": ">=5.3.0"
