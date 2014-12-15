@@ -24,6 +24,11 @@ use Hexcores\Currency\Exceptions\NotSupportedTypeException;
 class Converter
 {
 	/**
+	 * Constant for converter version number
+	 */
+	const VERSION = "0.0.1";
+
+	/**
 	 * Exchange Service class instance
 	 *
 	 * @var \Hexcores\Currency\Contract\ExchangeContract

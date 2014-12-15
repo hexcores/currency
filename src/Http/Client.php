@@ -20,9 +20,16 @@ namespace Hexcores\Currency\Http;
 
 class Client
 {
-	
+	/**
+	 * Request url
+	 * @var string
+	 */
 	protected $url;
 
+	/**
+	 * Create new Client instance
+	 * @param string|null $url
+	 */
 	public function __construct($url = null)
 	{
 		if (!extension_loaded('curl')) 
@@ -37,6 +44,11 @@ class Client
         }
 	}
 
+	/**
+	 * Set request url to client
+	 * @param string $url
+	 * @return \Hexcores\Currency\Http\Client
+	 */
 	public function setUrl($url)
 	{
 		$this->url = $url;
@@ -44,6 +56,11 @@ class Client
 		return $this;
 	}
 
+	/**
+	 * Get data from request url with curl
+	 * @param  string|null $url
+	 * @return json object
+	 */
 	public function get($url = null)
 	{
 		if ( ! is_null($url))
@@ -59,6 +76,12 @@ class Client
 		return json_decode($json);
 	}
 
+	/**
+	 * Prepare the url before request
+	 * @param  string $url
+	 * @return void
+	 * @throws \RuntimeException If request url is null.
+	 */
 	protected function prepare($url)
 	{
 		if ( ! is_null($url))
