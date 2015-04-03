@@ -43,7 +43,23 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
     	// Covert with original value
     	$result2 = $converter->convertToMMK();
 
-    	$this->assertSame($result1, $result2);
+        $this->assertSame($result1, $result2);
+    }
+
+    public function testConvertForNewValueWithPhpMagicMethod()
+    {
+        $exchange = M::mock('Hexcores\Currency\Contract\ExchangeContract');
+        $exchange->shouldReceive('make')->once()->andReturn(2000);
+
+        $formatter = M::mock('Hexcores\Currency\Contract\FormatterContract');
+        $formatter->shouldReceive('make')->once()->andReturn('2,000.00Ks');
+
+        $converter = new Converter($exchange, $formatter);
+
+        // Convert with new value
+        $result = $converter->convertToMMK(2);
+
+        $this->assertSame('2,000.00Ks', $result);
     }
 
     /**
