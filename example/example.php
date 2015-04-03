@@ -22,7 +22,7 @@ use Hexcores\Currency\Exchange\CentralBankMyanmarExchange;
 $ex = new CentralBankMyanmarExchange(new Client());
 $f = new BaseFormatter();
 $converter = new Converter($ex, $f);
-var_dump($f->make(10000, Type::CNY)); exit;
+
 echo "Current USD is 2500<br>";
 echo "========================";
 
