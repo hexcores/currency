@@ -1,13 +1,19 @@
 {
     "name": "hexcores/currency",
     "description": "Currency converter library",
+    "keywords": ["currency", "converter", "exchange"],
     "license": "MIT",
+    "homepage" : "https://github.com/hexcores/currency",
     "authors": [
         {
             "name": "Nyan Lynn Htut",
-            "email": "nyanlynnhtut@hexcores.com"
+            "email": "nyanlynnhtut@hexcores.com",
+            "role" : "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/hexcores/currency/issues"
+    },
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.0"

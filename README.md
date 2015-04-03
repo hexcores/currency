@@ -3,6 +3,7 @@
 Currency package is easy to use multiple currency value (format) at your application. (eg: E-Commerce)
 
 [![Build Status](https://img.shields.io/travis/hexcores/currency.svg?style=flat-square)](https://travis-ci.org/hexcores/currency)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/hexcores/currency/master/LICENSE)
 
 ## Package Dependencies
 
@@ -28,6 +29,18 @@ Currency package is easy to use multiple currency value (format) at your applica
 - THB (Thai Baht)
 - USD (US Dollar)
 
+## Install
+
+You can install currency package from [composer](https://packagist.org/packages/hexcores/currency)
+
+``` json
+{
+    "require": {
+        "hexcores/currency": "dev-master"
+    }
+}
+```
+
 ## Usage
 
 ```php
@@ -44,3 +57,30 @@ Currency package is easy to use multiple currency value (format) at your applica
 	echo "Convert : ". $converter->convert(2500, Type::USD, Type::MMK);
 	echo "<br>Convert AUD: ". $converter->convert(2500, Type::USD, Type::AUD);
 ```
+
+#### Use central bank exchange with factory
+
+```php
+	use Hexcores\Currency\Type;
+	use Hexcores\Currency\Factory;
+
+	$converter = Factory::centralBank();
+
+	echo "Convert : ". $converter->convert(2500, Type::USD, Type::MMK);
+	echo "<br>Convert AUD: ". $converter->convert(2500, Type::USD, Type::AUD);
+
+```
+
+## Example
+
+You can run example.php file from example folder.
+
+## Testing
+
+``` bash
+$ phpunit
+```
+
+## Contributing
+
+TODO
