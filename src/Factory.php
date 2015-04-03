@@ -29,7 +29,7 @@ class Factory
 	 *
 	 * @var array
 	 */
-	protected static $instance = [];
+	protected static $instance = array();
 
 	/**
 	 * Create central bank myanmar converter.
