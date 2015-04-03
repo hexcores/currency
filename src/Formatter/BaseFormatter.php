@@ -37,6 +37,7 @@ class BaseFormatter implements FormatterContract
 		$typedata = Type::getTypeData($type);
 
 		$dec_point = $typedata['decimal_mark'];
+		
 		$thousands_sep = $typedata['thousand_marker'];
 
 		$format = number_format($value, $decimals, $dec_point, $thousands_sep);

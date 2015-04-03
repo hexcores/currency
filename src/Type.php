@@ -144,8 +144,7 @@ class Type
 	 */
 	public static function getTypeData($type)
 	{
-		if ( ! static::isSupported($type))
-		{
+		if ( ! static::isSupported($type)) {
 			throw new NotSupportedTypeException($type);
 		}
 

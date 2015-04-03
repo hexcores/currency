@@ -41,11 +41,11 @@ abstract class AbstractExchange implements ExchangeContract
 	 **/
 	protected function checkCurrenyType($from, $to)
 	{
-		if (! Type::isSupported($from) ) {
+		if ( ! Type::isSupported($from) ) {
 			throw new NotSupportedTypeException($from);
 		}
 
-		if (! Type::isSupported($to) ) {
+		if ( ! Type::isSupported($to) ) {
 			throw new NotSupportedTypeException($to);
 		}
 
