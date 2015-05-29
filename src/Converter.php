@@ -26,7 +26,7 @@ class Converter
 	/**
 	 * Constant for converter version number
 	 */
-	const VERSION = "0.0.3";
+	const VERSION = "0.0.4";
 
 	/**
 	 * Exchange Service class instance
