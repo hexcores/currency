@@ -26,8 +26,9 @@ interface FormatterContract
 	 * @param integer $value
 	 * @param string $type Currency type (eg: USD, EUR)
 	 * @param int $decimals The number of decimal points.
+	 * @param boolean $symbol Use curreny symbol or not. Default is true
 	 * @return string
 	 **/
-	public function make($value, $type, $decimals);
+	public function make($value, $type, $decimals, $symbol);
 
 } // END interface FormatterContract

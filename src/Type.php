@@ -75,47 +75,56 @@ class Type
 			'AUD' => array(
 				'format'			=> 'A${value}',
 				'decimal_mark'   	=> '.',
-	            'thousand_marker'  	=> ','
+	            'thousand_marker'  	=> ',',
+	            'symbol'			=> 'A$'
 			),
 			'CNY' => array(
 				'format'			=> '&yen;{value}',
 				'decimal_mark'   	=> '.',
-	            'thousand_marker'  	=> ','
+	            'thousand_marker'  	=> ',',
+	            'symbol'			=> '&yen;'
 			),
 			'EUR' => array(
 	            'format'     		=> '&euro;{value}',
 	            'decimal_mark'    	=> '.',
-	            'thousand_marker'   => ','
+	            'thousand_marker'   => ',',
+	            'symbol'			=> '&euro;'
 	        ),
 			'GBP' => array(
 	            'format'      		=> '&pound;{value}',
 	            'decimal_mark'     	=> '.',
-	            'thousand_marker'   => ','
+	            'thousand_marker'   => ',',
+	            'symbol'			=> '&pound;'
 	        ),
 	        'JPY' => array(
 				'format'			=> '&yen;{value}',
 				'decimal_mark'   	=> '.',
-	            'thousand_marker'  	=> ','
+	            'thousand_marker'  	=> ',',
+	            'symbol'			=> '&yen;'
 			),
 			'MMK' => array(
 				'format'			=> '{value}Ks',
 				'decimal_mark'   	=> '.',
-	            'thousand_marker'  	=> ','
+	            'thousand_marker'  	=> ',',
+	            'symbol'			=> 'Ks'
 			),
 			'SGD' => array(
 	            'format'      		=> 'S${value}',
 	            'decimal_mark'     	=> '.',
-	            'thousand_marker'   => ','
+	            'thousand_marker'   => ',',
+	            'symbol'			=> 'S$'
 	        ),
 	        'THB' => array(
 	            'format'      		=> '฿{value}',
 	            'decimal_mark'     	=> '.',
-	            'thousand_marker'   => ','
+	            'thousand_marker'   => ',',
+	            'symbol'			=> '฿'
 	        ),
 			'USD' => array(
 	            'format'      		=> '${value}',
 	            'decimal_mark'     	=> '.',
-	            'thousand_marker'   => ','
+	            'thousand_marker'   => ',',
+	            'symbol'			=> '$'
 	        )
 		);
 

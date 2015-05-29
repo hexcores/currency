@@ -263,7 +263,7 @@ class Converter
 	 */
 	protected function makeFormatting($value)
 	{
-		return $this->formatter->make($value, $this->to, $this->getDecimal());
+		return $this->formatter->make($value, $this->to, $this->getDecimal(), false);
 	}
 
 	/**

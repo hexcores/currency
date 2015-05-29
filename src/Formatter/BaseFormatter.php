@@ -30,7 +30,7 @@ class BaseFormatter implements FormatterContract
 	 * {@inheritdoc}
 	 *
 	 **/
-	public function make($value, $type, $decimals = 2)
+	public function make($value, $type, $decimals = 2, $symbol = true)
 	{
 		$type = strtoupper($type);
 
@@ -43,6 +43,11 @@ class BaseFormatter implements FormatterContract
 		$format = number_format($value, $decimals, $dec_point, $thousands_sep);
 
 		$this->value = str_replace('{value}', $format, $typedata['format']);
+
+		if ($symbol === false)
+		{
+			$this->value = str_replace($typedata['symbol'], '', $this->value);
+		}
 
 		return $this->value;
 	}

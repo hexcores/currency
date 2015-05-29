@@ -28,7 +28,7 @@ class TypeTest extends \PHPUnit_Framework_TestCase
 		//$this->assertContains('thousand_marker', $type);
 
 		// Test for $type count
-		$this->assertEquals(3, count($type));
+		$this->assertEquals(4, count($type));
 	}
 
 	/**
