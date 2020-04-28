@@ -32,7 +32,16 @@ class CentralBankMyanmarExchange extends AbstractExchange
 	{
 		$this->client = $client;
 	}
-
+	
+	public function rates()
+	{
+		if ( empty($this->cache) ) {
+			$this->initRequestFromApi();
+		}
+		
+		return $this->cache;
+	}
+	
 	/**
 	 * {@inheritdoc}
 	 */
